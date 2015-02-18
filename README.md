@@ -1,4 +1,4 @@
-# Powershell ISE WinMerge ISE Add-On Mpdule
+# Powershell ISE WinMerge ISE Add-On Module
 - - -
 This ISE Add-On adds integration with the WINMerge application into the ISE.
 
@@ -9,7 +9,7 @@ For more information about WinMerge go to: http://winmerge.org/
 ![ScreenShot](https://raw.githubusercontent.com/stefanstranger/ISEWinMerge/master/isewinmergemodule.gif)
 
 # Install
-1. First install WinMerge using PowerShell OneGet or manually from http://winmerge.org
+1. Install WinMerge using PowerShell OneGet or manually from http://winmerge.org
    Default installation folder which module is looking for is 'C:\Program Files (x86)\WinMerge\WinMergeU.exe'
    If WinMerge is not installed in default folder change the following variable in ISEWinMerge.psm1 file.
    # Configure location of WinMerge
