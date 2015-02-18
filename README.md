@@ -17,6 +17,13 @@ For more information about WinMerge go to: http://winmerge.org/
 2. Install ShowUI module from https://showui.codeplex.com/ or using PowerShell OneGet.
    OneGet installation:
    Find-Module ShowUi | Install-Module -verbose
+3. To install the module including all source code you can just run in a PowerShell v3 or higher the following command:
+<pre>
+iex (New-Object Net.WebClient).DownloadString("https://gist.githubusercontent.com/stefanstranger/b4c75d440469f1dc25c7/raw/e548f8105b4a22345d9531f03a97a11ffe2a4aec/InstallISEWinMergeModule.ps1")
+</pre>
 
 Run in PowerShell ISE
 Import-Module ISEWinMerge
+Start-ISEWinMerge
+
+or hit Alt-W in ISE
