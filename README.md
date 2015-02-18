@@ -21,7 +21,7 @@ For more information about WinMerge go to: http://winmerge.org/
    Find-Module ShowUi | Install-Module -verbose
  3. To install the module including all source code you can just run in a PowerShell v3 or higher the following command:
 <pre>
-iex (New-Object Net.WebClient).DownloadString("https://gist.githubusercontent.com/stefanstranger/b4c75d440469f1dc25c7/raw/e548f8105b4a22345d9531f03a97a11ffe2a4aec/InstallISEWinMergeModule.ps1")
+iex (New-Object Net.WebClient).DownloadString("http://bit.ly/isewinmerge")
 </pre>
 
 # Run
