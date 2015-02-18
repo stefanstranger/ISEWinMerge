@@ -1,23 +1,22 @@
-# Powershell WinMerge ISE Add-On 
+# Powershell ISE WinMerge ISE Add-On Mpdule
 - - -
 This ISE Add-On adds integration with the WINMerge application into the ISE.
 
 For more information about WinMerge go to: http://winmerge.org/
 
-02/12/2015: - Initial version
+02/18/2015: - Initial version
 
-02/14/2015: - Changed location default install WinMerge. Some visual improvements
-
-![ScreenShot](https://raw.githubusercontent.com/stefanstranger/PowerShell/master/WinMergeISEAddOn/WinMergeWPF_opt.gif)
+![ScreenShot](https://raw.githubusercontent.com/stefanstranger/ISEWinMerge/master/isewinmergemodule.gif)
 
 # Install
-First install WinMerge using PowerShell OneGet or manually from http://winmerge.org
+1. First install WinMerge using PowerShell OneGet or manually from http://winmerge.org
+   Default installation folder which module is looking for is 'C:\Program Files (x86)\WinMerge\WinMergeU.exe'
+   If WinMerge is not installed in default folder change the following variable in ISEWinMerge.psm1 file.
+   # Configure location of WinMerge
+   $global:exe = "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
+2. Install ShowUI module from https://showui.codeplex.com/ or using PowerShell OneGet.
+   OneGet installation:
+   Find-Module ShowUi | Install-Module -verbose
 
-Install ShowUI module from https://showui.codeplex.com/
-
-Change the following part of the WINMerge_WPF.ps1 file
-..
-$exe = "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
-..
-
-Run .\WinMerge-ISEAddOn.ps1
+Run in PowerShell ISE
+Import-Module ISEWinMerge
