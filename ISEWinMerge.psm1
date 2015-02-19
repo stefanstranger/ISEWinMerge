@@ -28,24 +28,76 @@ Function Test-WinMerge ($path = $exe)
 
 Function Start-WinMerge
 {
+    [CmdletBinding()]
+    Param
+    (
+        # Param1 help description
+        [ValidateSet("WinMerge","Office2014","VisualStudio2013")] 
+        [string]$Style
+    )
+    
+    
+    
     # Variables
     $global:tabs = $PSISe.PowerShellTabs.Files
     $totalrows = $tabs.count + 3
     $tabsrow = 1
 
-    #WPF Object Styles
-    Set-UIStyle "L1" @{ FontFamily = "Helvetica"; FontSize = 14; FontWeight = "Bold"; ForeGround = "#6E0504" }
-    Set-UIStyle "C1" @{ FontFamily = "Helvetica"; FontSize = 12 }
+    switch ($style)
+    {
+        'WinMerge'   {
+                        $gridparam = @{
+                        Name = "WinMerge"
+                        ControlName = "Show-ISETab"
+                        Background = '#FFD82F' #WinMerge color
+                        Rows = $totalrows
+                        Columns =  2
+                        }
 
-    # Grid Style
-    $gridparam = @{
-        Name = "WinMerge"
-        ControlName = "Show-ISETab"
-        Background = '#FFD82F' #WinMerge color
-        Rows = $totalrows
-        Columns =  2
+                        Set-UIStyle "L1" @{ FontFamily = "Helvetica"; FontSize = 14; FontWeight = "Bold"; ForeGround = "#6E0504" }
+                        Set-UIStyle "C1" @{ FontFamily = "Helvetica"; FontSize = 12 }
+    
+                     }
+        'Office2014' {
+                        #Office 2014 theme
+                        $gridparam = @{
+                        Name = "WinMerge"
+                        ControlName = "Show-ISETab"
+                        Background = '#0072C6'
+                        Rows = $totalrows
+                        Columns =  2
+                        }
+
+                        #Office 2014
+                        Set-UIStyle "L1" @{ FontFamily = "Helvetica"; FontSize = 14; FontWeight = "Bold"; ForeGround = "#FFFFFF" }
+                        Set-UIStyle "C1" @{ FontFamily = "Helvetica"; FontSize = 12 ; ForeGround = "#FFFFFF"}
+                     }
+        'VisualStudio2013' {
+                        $gridparam = @{
+                        Name = "WinMerge"
+                        ControlName = "Show-ISETab"
+                        Background = '#652D90'
+                        Rows = $totalrows
+                        Columns =  2
+                        }
+
+                        Set-UIStyle "L1" @{ FontFamily = "Helvetica"; FontSize = 14; FontWeight = "Bold"; ForeGround = "#FFFFFF" }
+                        Set-UIStyle "C1" @{ FontFamily = "Helvetica"; FontSize = 12 }
+                     }
+        Default      {
+                        $gridparam = @{
+                        Name = "WinMerge"
+                        ControlName = "Show-ISETab"
+                        Background = '#FFD82F' #WinMerge color
+                        Rows = $totalrows
+                        Columns =  2
+                        }
+
+                        Set-UIStyle "L1" @{ FontFamily = "Helvetica"; FontSize = 14; FontWeight = "Bold"; ForeGround = "#6E0504" }
+                        Set-UIStyle "C1" @{ FontFamily = "Helvetica"; FontSize = 12 }
+
+                     }
     }
-
 
     New-Grid @gridparam -Show -On_Loaded {
         $window.title = "WinMerge ISE add-on" } {
