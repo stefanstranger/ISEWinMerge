@@ -70,10 +70,13 @@ Function Start-WinMerge
                         $selected = ($checkboxes.Value | ? ischecked -eq "$true").count
 
                         #Check if only 2 tabs in WPF form are selected.
-                        if ($selected -ne 2)
+                        if ($selected -eq 0 -or $selected -eq 1)
+                        {
+                            [System.Windows.Forms.MessageBox]::Show("Select 2 checkboxes!","WinMerge",0,"Warning");
+                        }
+                        elseif ($selected -ne 2)
                             {
                                 [System.Windows.Forms.MessageBox]::Show("Only 2 checkboxes allowed!","WinMerge",0,"Warning");
-                                $Window | Close-Control
                             }
                             else 
                             {
@@ -91,22 +94,21 @@ Function Start-WinMerge
                                     $param1 = [string]$params[0]
                                     $param2 = [string]$params[1]
                                     #Call WinMerge application
-                                    $exe = "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
                                     &$exe $param1 $param2                              
                                 
                                 }
                                 else
                                 {
-                                    [System.Windows.Forms.MessageBox]::Show("Shoot","MyChecks",0,"Warning");
+                                    [System.Windows.Forms.MessageBox]::Show("Sorry something went wrong.","WinMerge",0,"Warning");
                                     $parent | Set-UIValue -passThru | Close-Control
                                 }
                             }
 
-                        } -IsDefault -Margin 5 -Row $totalrows -Column 0 #-ColumnSpan 1
+                        } -IsDefault -Margin 5 -Row $totalrows -Column 0
 
                 Button "Cancel" -On_Click {            
                     $parent |  Set-UIValue -passThru | Close-Control          
-                } -IsDefault -Margin 5 -Row $totalrows -Column 1 #-ColumnSpan 2
+                } -IsDefault -Margin 5 -Row $totalrows -Column 1
             }
     }
 }
