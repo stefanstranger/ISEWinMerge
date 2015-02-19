@@ -26,30 +26,6 @@ Function Test-WinMerge ($path = $exe)
 
 }
 
-Function Show-WarningMessagebox ($message) {
-
-    # Grid Style
-                        $windowparam = @{
-        Title = "WinMerge"
-        Rows = 2
-        Columns =  2
-        SizeToContent = "WidthAndHeigh"
-    }
-
-
-    New-Window @windowparam   -show {
-
-        New-Grid -Rows 2 -Columns 2 {
-            New-Label -Content $message -Row 0 -Column 1
-            New-Image -Source .\messagebox_warning.png -Row 0 -Column 0 -Height 50 -Width 50 
-            New-Button -Row 1 -Column 1 "OK" -Height 30 -Width 50 -IsDefault -On_Click { 
-                Get-ParentControl | 
-                    Close-Control
-            } 
-        }
-    }
-}
-
 Function Start-WinMerge
 {
     # Variables
@@ -93,17 +69,10 @@ Function Start-WinMerge
                         $checkboxes = get-variable
                         $selected = ($checkboxes.Value | ? ischecked -eq "$true").count
 
-
                         #Check if only 2 tabs in WPF form are selected.
-                        if (($selected -eq 1) -or ($selected -eq 0))
+                        if ($selected -ne 2)
                             {
-                                Show-WarningMessagebox -message "Please select 2 checkboxes!"
-                                $Window | Close-Control
-                            }
-
-                        elseif ($selected -ne 2)
-                            {
-                                Show-WarningMessagebox -message "Only 2 checkboxes allowed!"
+                                [System.Windows.Forms.MessageBox]::Show("Only 2 checkboxes allowed!","WinMerge",0,"Warning");
                                 $Window | Close-Control
                             }
                             else 
@@ -122,12 +91,13 @@ Function Start-WinMerge
                                     $param1 = [string]$params[0]
                                     $param2 = [string]$params[1]
                                     #Call WinMerge application
+                                    $exe = "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
                                     &$exe $param1 $param2                              
                                 
                                 }
                                 else
                                 {
-                                    Show-WarningMessagebox -message "Something went wrong!"
+                                    [System.Windows.Forms.MessageBox]::Show("Shoot","MyChecks",0,"Warning");
                                     $parent | Set-UIValue -passThru | Close-Control
                                 }
                             }
